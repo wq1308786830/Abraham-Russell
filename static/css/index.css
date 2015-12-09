@@ -1,0 +1,21 @@
+#content{
+    height: 3rem;
+}
+#bigger {
+    text-align: center;
+    line-height: 3rem;
+    height: 3rem;
+    background: #4db14d;
+    animation: bg-clf 2.5s;
+    transition: width 2.5s, heght 2.5s, transform 2.5s;
+}
+
+@keyframes bg-clf {
+    0% {
+        background: white;
+    }
+    100% {
+        background: #4db14d;
+
+    }
+}

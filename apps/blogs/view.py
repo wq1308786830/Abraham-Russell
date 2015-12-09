@@ -15,4 +15,5 @@ def index():
 
     :return:
     """
+
     return render_template("index.html")
