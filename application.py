@@ -4,7 +4,7 @@
 import os
 from flask import Flask, g, json
 from apps.blogs.view import blog
-from apps.models import db_session
+from apps.database.database import db_session
 
 PROJECT_PATH = os.path.dirname(__file__)
 
@@ -63,10 +63,10 @@ def config_db(app):
     @app.teardown_request
     def teardown_request(exception):
 
-        if hasattr(g, 'db_session'):
-            g.db_session.close()
+        if hasattr(g, 'data_session'):
+            g.data_session.close()
         if exception:
-            print 'on app.teardown_request exception==='+exception
+            print 'on app.teardown_request exception===', exception
 
 
 def config_route(app):

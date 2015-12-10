@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 # 创建对象的基类:
-from apps.models import db_session
+from apps.database.database import db_session
 
 Base = declarative_base()
 

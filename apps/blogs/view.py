@@ -2,6 +2,8 @@
 # !/usr/bin/python
 
 from flask import Blueprint, request, render_template, url_for
+
+from apps.database.database import db_session
 from apps.models.models import User
 
 __author__ = 'Russell'
@@ -20,16 +22,16 @@ def index(username, password):
 
     print username, password
     # 创建session对象:
-    # session = db_session()
+    session = db_session()
     # 创建新User对象:
-    # new_user = User(id=username, name=username)
+    new_user = User(id=password, name=username)
     # 添加到session:
-    # session.add(new_user)
+    session.add(new_user)
     # simple query
-    user = User.query.filter(User.name == 'a').first()
+    user = User.query.filter(User.name == 'aa').first()
     print user.id + user.name
     # 提交即保存到数据库:
-    # session.commit()
+    session.commit()
     # 关闭session:
-    # session.close()
+    session.close()
     return render_template("index.html")
