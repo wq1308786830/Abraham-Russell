@@ -1,0 +1,32 @@
+{% extends theme("layout.html") %}
+
+{#{% block extrahead %}#}
+{#<link href="{{ url_for('feeds.user', username=user.username) }}" rel="alternate" type="application/atom+xml" title="newsmeme - hot" /> #}
+{#{% endblock %}#}
+
+
+{#{% macro userlink(tab, text, url) -%}#}
+{#{% if tab==selected_user_tab %}#}
+{#<strong>{{ text }}</strong>#}
+{#{% else %}#}
+{#<a href="{{ url }}">{{ text }}</a>#}
+{#{% endif %}#}
+{#{%- endmacro %}#}
+
+{% block content %}
+<div class="container">
+    <div class="span-12">
+        <h2>{{ user.username }} </h2>
+        <h3>
+            <strong>{{ user.karma }}</strong> {{ _('karma') }} | 
+            {{ _('joined') }} {{ user.date_joined|timesince }}
+        </h3>
+    </div>
+    <div class="span-12 last">
+        <img src="{{ user.gravatar_url(80) }}" alt="{{ user.username }}">
+    </div>
+</div>
+{% block page_content %}
+{% endblock %}
+
+{% endblock %}

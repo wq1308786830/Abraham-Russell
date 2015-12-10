@@ -22,7 +22,7 @@ if DEBUG:
     MYSQL_PORT = '3306'
     MYSQL_USER = 'root'
     MYSQL_PASS = '123456'
-    MYSQL_DB = 'app_xmwp'
+    MYSQL_DB = 'test'
 
     APNS_KEY_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'system/apns-test.pem')
 
@@ -36,7 +36,7 @@ else:
     MYSQL_PORT = '3306'
     MYSQL_USER = 'root'
     MYSQL_PASS = '123456'
-    MYSQL_DB = 'app_xmwp'
+    MYSQL_DB = 'test'
 
     APNS_KEY_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'system/apns.pem')
 

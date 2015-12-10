@@ -3,9 +3,8 @@
 
 import os
 from flask import Flask, g, json
-import pymysql
-from apps.database import db
 from apps.blogs.view import blog
+from apps.models import db_session
 
 PROJECT_PATH = os.path.dirname(__file__)
 
@@ -52,22 +51,22 @@ def config_log(app):
 
 def config_db(app):
     """
-    配置数据
+    配置数据库session创建
     :param app:
     :return:
     """
-    db.configure_db(app)
 
     @app.before_request
     def before_request():
-        g.db = pymysql.connect(host=app.config.get("MYSQL_HOST"), user=app.config.get("MYSQL_USER"),
-                               passwd=app.config.get("MYSQL_PASS"), db=app.config.get("MYSQL_DB"),
-                               port=int(app.config.get("MYSQL_PORT")))
+        g.data_session = db_session()
 
     @app.teardown_request
     def teardown_request(exception):
-        if hasattr(g, 'db'):
-            g.db.close()
+
+        if hasattr(g, 'db_session'):
+            g.db_session.close()
+        if exception:
+            print 'on app.teardown_request exception==='+exception
 
 
 def config_route(app):
