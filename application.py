@@ -5,6 +5,7 @@ import os
 from flask import Flask, g, json
 from apps.blogs.view import blog
 from apps.database.database import db_session
+from apps.tasks import make_celery
 
 PROJECT_PATH = os.path.dirname(__file__)
 
@@ -15,6 +16,12 @@ def create_app():
     config_file = os.path.abspath(os.path.join(PROJECT_PATH, 'etc/config.py'))
     app.config.from_pyfile(config_file)
 
+    app.config.update(
+        CELERY_BROKER_URL='redis://localhost:6379',
+        CELERY_RESULT_BACKEND='redis://localhost:6379'
+    )
+
+    config_celery(app)
     config_log(app)
     config_db(app)
     config_route(app)
@@ -81,3 +88,16 @@ def config_route(app):
     @app.errorhandler(400)
     def handler_400(error):
         return json.dumps(dict(message='参数不能为空:' + str(error.args))), 400
+
+
+def config_celery(app):
+    """
+
+    :param app:
+    :return:
+    """
+    celery = make_celery(app)
+
+    @celery.task()
+    def add_together(a, b):
+        return a + b
