@@ -17,7 +17,7 @@ def index():
     :return:
     """
 
-    return render_template("index2.html")
+    return render_template("index.html")
 
 
 @blog.route("/<id>&<username>")
